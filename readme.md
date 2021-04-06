@@ -1,5 +1,5 @@
 # Worker Framework
-This is framework for building background worker queue apps
+An Worker framework for built background process queue, made with Bull without worries
 
 # Manual
 ## 1. spawn.sh
