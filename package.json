@@ -1,0 +1,23 @@
+{
+  "name": "worker-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bull": "^3.20.0",
+    "commander": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "knex": "^0.21.16",
+    "mysql": "^2.18.1",
+    "objection": "^2.2.7",
+    "redis": "^3.0.2",
+    "socket.io-client": "^3.1.0",
+    "uuid": "^8.3.2"
+  }
+}
