@@ -2,34 +2,46 @@
 An Worker framework for built background process queue, made with Bull without worries
 
 # Manual
-## 1. spawn.sh
-spawn.sh itu file untuk hidupin worker langsung banyak tergantung dari jumlah yg di tentukan,  ini untuk dijalanin di server
+## spawn.sh
+For spawning workers in server
 
-## 2. start.bat
-buat orang gblk yang masih pake windows, tinggal klik 2x
+## parallel.bat
+Same as ```spawn.sh``` but for windows
 
-## 3. parallel.bat
-sama kaya spawn.sh, bedanya untuk windows
+## routes/Queue.js
+Routing your queue based on event name
 
-## 4. routes/Queue.js
-Disini tempat routing dari event - event yang lagi jalan di backend.
+## Folder models
+An ORM for DB Intracation
 
-## 5. Folder models
-Ini isinya file ORM untuk table di DB.
-
-## 6. Folder handler
-Tempat perintah si workernya, bikin 1 fungsi yg diexport terus di import ke routes/Queue.js
-untuk parameter fungsinya itu payload tipenya Object, kalo lu ga tau isinya dari payload bisa di ```console.log``` nanti lu bisa pake data apa yg lu butuhkan
-
-## 7. Folder database
-Buat koneksi DB, jgn diutak-atik pokoknya
-
-## 8. app/Engine.js
-Nah ini mesinnya si worker, jgn diutak atik, kecuali mau nambahin AUTH di redis nya atau ganti property koneksi db / socket dll
-
-## 9. cli.js
-Fungsinya untuk ngetest handler lu tanpa perlu jalanin worker di background, jadi bisa langusng pake printah
+## Folder handler
+To store your logic worker, must be have ```payload``` parameter, for example:
+```js
+const generatePDF = (payload) => {
+  // payload can store data infomation from initiator of worker
+}
+export default generatePDF;
 ```
-$ node cli.js
+
+## Folder database
+Connection config of DB
+
+## app/Engine.js
+Engine for routing Queue & Configuration redis
+
+## cli.js
+Used for testing purpose, in case you have ```generatePDF``` handler you should add new flag in cli.js:
+```js
+program
+  .command('twitter')
+  .option('-g, --generate', 'generating pdf')
+  .cation((cmd) => {
+    if(cmd.generate){
+      // call your handler function
+    }
+  }
 ```
-nanti muncul help bisa diatur di cli.js nya dibagian program.command()
+run with
+```
+$ node cli.js twitter -g
+```
